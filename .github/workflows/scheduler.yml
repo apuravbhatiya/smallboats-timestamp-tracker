@@ -2,7 +2,7 @@ name: Daily GOV.UK Timestamp Tracker
 
 on:
   schedule:
-    - cron: "00 9 * * *"  # Runs every day at 09:00 UTC
+    - cron: "7 */6 * * *"   # at minute 07 past every 6th hour (00:07, 06:07, 12:07, 18:07 UTC)
   workflow_dispatch:
 
 permissions:
