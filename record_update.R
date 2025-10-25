@@ -40,8 +40,8 @@ last_row <- tail(table_data, 1)
 # --- 4. Build entry with both timestamp and table data ---
 entry <- data.frame(
   date_checked = format(with_tz(now(), "Europe/London"), "%Y-%m-%d %H:%M:%S"),
-  govuk_public_updated_at_utc = format(ts_utc, "%Y-%m-%d %H:%M:%S"),
-  govuk_public_updated_at_london = format(ts_london, "%Y-%m-%d %H:%M:%S"),
+  govuk_updated_at_utc = format(ts_utc, "%Y-%m-%d %H:%M:%S"),
+  govuk_updated_at_london = format(ts_london, "%Y-%m-%d %H:%M:%S"),
   table_date = last_row$Date,
   migrants_arrived = last_row$Migrants_arrived,
   boats_arrived = last_row$Boats_arrived,
@@ -68,4 +68,5 @@ if (!file.exists(CSV_FILE) || file.info(CSV_FILE)$size == 0) {
 
 cat("Recorded:", format(ts_london, "%Y-%m-%d %H:%M:%S %Z"),
     "| Latest data →", last_row$Date, last_row$Migrants_arrived, "migrants,", last_row$Boats_arrived, "boats\n")
+
 
