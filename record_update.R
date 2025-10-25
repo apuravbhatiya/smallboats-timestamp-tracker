@@ -15,10 +15,10 @@ html_text <- request(URL) |> req_perform() |> resp_body_string()
 page <- read_html(html_text)
 
 timestamp <- page |>
-  html_element("meta[name='govuk:public-updated-at']") |>
+  html_element("meta[name='govuk:updated-at']") |>
   html_attr("content")
 
-if (is.na(timestamp) || is.null(timestamp)) stop("No govuk:public-updated-at tag found.")
+if (is.na(timestamp) || is.null(timestamp)) stop("No govuk:updated-at tag found.")
 
 ts_utc <- ymd_hms(timestamp, tz = "UTC")
 ts_london <- with_tz(ts_utc, "Europe/London")
@@ -68,3 +68,4 @@ if (!file.exists(CSV_FILE) || file.info(CSV_FILE)$size == 0) {
 
 cat("Recorded:", format(ts_london, "%Y-%m-%d %H:%M:%S %Z"),
     "| Latest data →", last_row$Date, last_row$Migrants_arrived, "migrants,", last_row$Boats_arrived, "boats\n")
+
